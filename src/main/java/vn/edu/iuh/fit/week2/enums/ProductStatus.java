@@ -1,13 +1,11 @@
 package vn.edu.iuh.fit.week2.enums;
 
-import jakarta.persistence.*;
-
-public enum EmployeeStatus {
+public enum ProductStatus {
     ACTIVE(1),
     IN_ACTIVE(0),
     TERMINATE(-1);
     private int value;
-    EmployeeStatus(int value){
+    ProductStatus(int value){
         this.value = value;
     }
     public int getValue(){

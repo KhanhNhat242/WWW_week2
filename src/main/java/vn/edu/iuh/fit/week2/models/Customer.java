@@ -1,35 +1,28 @@
 package vn.edu.iuh.fit.week2.models;
 
 import jakarta.persistence.*;
-import vn.edu.iuh.fit.week2.enums.EmployeeStatus;
-
-import java.sql.Date;
 
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "customer")
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "emp_id")
+    @Column(name = "cust_id")
     private long id;
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
-    private Date dob;
+    @Column(name = "cust_name")
+    private String name;
     private String email;
     private String phone;
     private String address;
-    private EmployeeStatus status;
 
-    public Employee() {
+    public Customer() {
     }
 
-    public Employee(String fullName, Date dob, String email, String phone, String address, EmployeeStatus status) {
-        this.fullName = fullName;
-        this.dob = dob;
+    public Customer(String name, String email, String phone, String address) {
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.status = status;
     }
 
     public long getId() {
@@ -40,20 +33,12 @@ public class Employee {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -80,24 +65,14 @@ public class Employee {
         this.address = address;
     }
 
-    public EmployeeStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EmployeeStatus status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Customer{" +
                 "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", dob=" + dob +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", status=" + status +
                 '}';
     }
 }
