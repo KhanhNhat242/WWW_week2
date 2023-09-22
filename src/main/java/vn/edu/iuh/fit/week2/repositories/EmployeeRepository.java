@@ -29,7 +29,13 @@ public class EmployeeRepository {
         em.merge(e);
     }
 
-    public List<Employee> getAllEmployee(){
+    public Employee findById(long id){
+        String sql = "select * from employee where emp_id like '"+id+"'";
+        Employee e = (Employee) em.createNativeQuery(sql, Employee.class).getSingleResult();
+        return e;
+    }
+
+    public List<Employee> getAll(){
         String sql = "select * from employee";
         List<Employee> le = em.createNativeQuery(sql, Employee.class).getResultList();
         return le;
