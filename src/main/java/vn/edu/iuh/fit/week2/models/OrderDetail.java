@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "order_detail")
-@IdClass(OrderDetail.OrderProductPK.class)
 public class OrderDetail implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,42 +83,4 @@ public class OrderDetail implements Serializable{
                 ", note='" + note + '\'' +
                 '}';
     }
-
-    public class OrderProductPK implements Serializable{
-        private Order order_id;
-        private Product product_id;
-
-        public OrderProductPK(Order order_id, Product product_id) {
-            this.order_id = order_id;
-            this.product_id = product_id;
-        }
-
-        public OrderProductPK() {
-        }
-
-        public Order getOrder_id() {
-            return order_id;
-        }
-
-        public void setOrder_id(Order order_id) {
-            this.order_id = order_id;
-        }
-
-        public Product getProduct_id() {
-            return product_id;
-        }
-
-        public void setProduct_id(Product product_id) {
-            this.product_id = product_id;
-        }
-
-        @Override
-        public String toString() {
-            return "OrderProductPK{" +
-                    "order_id=" + order_id +
-                    ", product_id=" + product_id +
-                    '}';
-        }
-    }
-
 }

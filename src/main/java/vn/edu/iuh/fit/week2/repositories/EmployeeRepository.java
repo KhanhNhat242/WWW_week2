@@ -2,23 +2,37 @@ package vn.edu.iuh.fit.week2.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import vn.edu.iuh.fit.week2.db.Connection;
 import vn.edu.iuh.fit.week2.enums.EmployeeStatus;
 import vn.edu.iuh.fit.week2.models.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class EmployeeRepository {
     private EntityManagerFactory emf;
     private EntityManager em;
+    private EntityTransaction tr;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public EmployeeRepository(){
         emf = Connection.getInstance().getEmf();
         em = emf.createEntityManager();
+        tr = em.getTransaction();
     }
 
     public void add(Employee e){
-        em.persist(e);
+        tr.begin();
+        try {
+            em.persist(e);
+            tr.commit();
+        }
+        catch (Exception ex){
+            tr.rollback();
+            ex.printStackTrace();
+        }
     }
 
     public void setStatus(Employee e, EmployeeStatus es){
@@ -26,7 +40,15 @@ public class EmployeeRepository {
     }
 
     public void update(Employee e){
-        em.merge(e);
+        tr.begin();
+        try {
+            em.merge(e);
+            tr.commit();
+        }
+        catch (Exception ex){
+            tr.rollback();
+            ex.printStackTrace();
+        }
     }
 
     public Employee findById(long id){

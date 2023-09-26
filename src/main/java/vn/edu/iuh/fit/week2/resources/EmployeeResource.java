@@ -4,6 +4,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vn.edu.iuh.fit.week2.models.Employee;
 import vn.edu.iuh.fit.week2.services.EmployeeService;
 
@@ -11,7 +13,8 @@ import java.util.List;
 
 @Path("/employees")
 public class EmployeeResource {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public EmployeeResource(){
         employeeService = new EmployeeService();
